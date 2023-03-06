@@ -32,3 +32,16 @@ header {
   font-size: 48px;
   font-weight: bold;
 }
+.myForm {
+  width: 50%;
+  min-width: 360px;
+  margin: 0 auto;
+}
+.myBtns {
+  display: flex;
+  justify-content: center;
+}
+.myBtns > button {
+  width: 60px;
+  margin: 0 4px;
+}
