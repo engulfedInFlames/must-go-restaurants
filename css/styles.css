@@ -2,11 +2,6 @@
     box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-}
-
-
 .banner {
     color: white;
     height: 250px;
