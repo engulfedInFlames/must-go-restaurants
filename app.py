@@ -77,18 +77,106 @@ def review_get():
     return jsonify({'result':all_reviews})
 
 
-# 카테고리 불러오기
+# ===================== 카테고리 불러오기 시작 =======================
 
-# # 카테고리 - 서울
+# 1 카테고리 - 서울
 @app.route("/popular/seoul", methods=["GET"])
 def review_seoul_get():
     reviews_category = list(db.restaurant.find({'tag':'서울'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
     return jsonify({'result':reviews_category})
  
+ # 2 카테고리 - 인천
+@app.route("/popular/incheon", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'인천'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+ # 3 카테고리 - 부산
+@app.route("/popular/busan", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'부산'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+# 4 카테고리 - 대구
+@app.route("/popular/daegu", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'대구'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 5 카테고리 - 광주
+@app.route("/popular/gwangju", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'광주'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+ # 6 카테고리 - 대전
+@app.route("/popular/daejeon", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'대전'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+# 7 카테고리 - 울산
+@app.route("/popular/ulsan", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'울산'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+# 8 카테고리 - 경기
+@app.route("/popular/gyeonggi", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'경기'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+# 9 카테고리 - 강원
+@app.route("/popular/gangwon", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'강원'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 10 카테고리 - 충북
+@app.route("/popular/n-chungcheong", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'충북'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 11 카테고리 - 충남
+@app.route("/popular/s-chungcheong", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'충남'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 12 카테고리 - 전북
+@app.route("/popular/n-jeolla", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'전북'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 13 카테고리 - 전남
+@app.route("/popular/s-jeolla", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'전남'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 14 카테고리 - 경북
+@app.route("/popular/n-gyeongsang", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'경북'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+
+# 15 카테고리 - 경남
+@app.route("/popular/s-gyeongsang", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'경남'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
+ 
+# 16 카테고리 - 제주특별자치도
+@app.route("/popular/jeju", methods=["GET"])
+def review_seoul_get():
+    reviews_category = list(db.restaurant.find({'tag':'제주특별자치도'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    return jsonify({'result':reviews_category})
 
 
-
-
+# ===================== 카테고리 불러오기 끝 =======================
 
 
 if __name__ == '__main__':
