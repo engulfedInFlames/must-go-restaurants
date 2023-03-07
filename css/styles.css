@@ -25,6 +25,10 @@ a {
     text-decoration: none;
 }
 
-.btn > .region {
+.region {
     display: flex;
+}
+
+.cards {
+    margin: 12px;
 }
