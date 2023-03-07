@@ -32,16 +32,38 @@ header {
   font-size: 48px;
   font-weight: bold;
 }
-.myForm {
+.my-form {
   width: 50%;
   min-width: 360px;
   margin: 0 auto;
 }
-.myBtns {
+.thumb-container {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  border: 2px solid #ced4da;
+  margin: 0 auto;
+}
+.thumb-container > img {
+  width: 100%;
+  object-fit: cover;
+}
+.detail-address {
+  display: flex;
+}
+.address-input {
+  margin-top: 8px;
+}
+.my-btns {
   display: flex;
   justify-content: center;
 }
-.myBtns > button {
+.my-btns > button {
   width: 60px;
   margin: 0 4px;
 }
+
+/*  주소 입력창 */
