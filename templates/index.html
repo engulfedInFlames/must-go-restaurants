@@ -3,10 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 변경-css파일 위치 삽입 방식 for flask -->
+    <link href="{{ url_for('static', filename='reset.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>맛집공유하기</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- 변경-css파일 위치 삽입 방식 for flask -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+
+    <title>asus 홈페이지</title>
 
 
     <script>
@@ -20,14 +34,29 @@
                 .then((res) => res.json())
                 .then((data) => {
                     let rows = data['result']
-                    $('#home').empty()
+                    $('#cards-box').empty()
                     rows.forEach((a) => {
                         let restaurant_name = a['restaurant_name'] //제목
                         let comment = a['comment'] //내용
                         let road_address = a['road_address'] //카테고리(지역)
-
-                        let temp_html = `${restaurant_name}, ${comment}, ${road_address} <br>`
-                        $('#home').append(temp_html);
+                        
+                        let temp_html = `
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="" >
+                                    
+                                </a>
+                                <div class="card-body">
+                                    <a href="" style="text-decoration: none;">
+                                    <h5 class="card-title">${restaurant_name}</h5>
+                                    <p class="card-text">${comment}, ${road_address}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                        `
+                        
+                        $('#cards-box').append(temp_html);
                     })
                 })
         }
@@ -36,7 +65,7 @@
                 .then((res) => res.json())
                 .then((data) => {
                     let rows = data['result']
-                    $('#home').empty()
+                    $('#cards-box').empty()
                     // list 꺼내기
                     rows.forEach((a) => {
                         let restaurant_name = a['restaurant_name'] //제목
@@ -44,8 +73,22 @@
                         let road_address = a['road_address'] //카테고리(지역)
 
                         console.log('title')
-                        let temp_html = `${restaurant_name}, ${comment}, ${road_address} <br>`
-                        $('#home').append(temp_html);
+                        let temp_html = `
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="" >
+                                    
+                                </a>
+                                <div class="card-body">
+                                    <a href="" style="text-decoration: none;">
+                                    <h5 class="card-title">${restaurant_name}</h5>
+                                    <p class="card-text">${comment}, ${road_address}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                                        `
+                        $('#cards-box').append(temp_html);
                     })
                 })
         }
@@ -56,9 +99,96 @@
 
 <body>
 
-    <a href="{{url_for('write_func')}}">글쓰기</a>
     <div id="home"></div>
     <button onclick="category()">카테고리테스트(서울)</button>
+<!-- css/style.css -->
+<div class="banner">
+    <h1>asus</h1>
+</div>
+
+<div class="button">
+    <a href="{{url_for('write_func')}}" class="m-1 btn btn-warning btn" role="button">
+      작성
+    </a>
+    <a href="/category.html" class="btn btn-dark btn" role="button">
+      카테고리
+    </a>
+    </div>
+</div>
+
+<main>
+
+
+<div class="cards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+        <div class="col">
+          <div class="card h-100">
+            <a href="" >
+              <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_bar1-1_v2.png" class="card-img-top" alt="요리주점 가게 이미지">
+            </a>
+            <div class="card-body">
+              <a href="" style="text-decoration: none;">
+                <h5 class="card-title">blog title</h5>
+                <p class="card-text">review</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <a href="">
+              <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea1-1_v2.png" class="card-img-top" alt="찻집 가게 이미지">
+            </a>
+            <div class="card-body">
+              <a href="">
+                <h5 class="card-title">blog title</h5>
+                <p class="card-text">review</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <a href="">
+              <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea2-1_v2.png" class="card-img-top" alt="카페, 디저트 가게 이미지">
+            </a>
+            <div class="card-body">
+              <a href="">
+                <h5 class="card-title">blog title</h5>
+                <p class="card-text">review</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <a href="">
+              <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea3-1_v2.png" class="card-img-top" alt="홍차 전문점 가게 이미지">
+            </a>
+            <div class="card-body">
+              <a href="">
+                <h5 class="card-title">blog title</h5>
+                <p class="card-text">review</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</main>
+
+<footer>
+<!-- 약식(팀 이름, 팀명, 역할, 저작권)-->
+<dl>
+<dt>팀명</dt>
+<dd>asus(Awesome Super Ultra Sexy)</dd>
+<dt>팀 구성원</dt>
+<dd>김경수(팀장), 왕규원, 원윤희, 서채연</dd>
+<dt>역할</dt>
+<dd></dd>
+</dl>
+</footer>
+
 
 
 </body>

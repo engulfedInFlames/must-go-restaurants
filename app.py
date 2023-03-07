@@ -29,7 +29,7 @@ def review_get():
 
 # @app.route("/show-review", methods=["GET"])
 # def review_get():
-#     all_reviews = list(db.restaurant.find({해당 글을 식별할 키},{'_id':False})) 
+#     all_reviews = list(db.restaurant.find({'id'=''},)) 
 #     return jsonify({'result':all_reviews})
 
 
