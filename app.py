@@ -69,7 +69,8 @@ def save_review():
     
 
 
-# # main(홈) - 전체 목록
+# main(홈) - 전체 목록
+# 목록(카드형)에 상세페이지로 가는 링크 필요 / 주소 가게 이름 사진만 나오는 걸로
 @app.route("/popular", methods=["GET"])
 def review_get():
     all_reviews = list(db.restaurant.find({},{'_id':False})) # DB에서 파일 전부 가져오기
@@ -81,7 +82,7 @@ def review_get():
 # # 카테고리 - 서울
 @app.route("/popular/seoul", methods=["GET"])
 def review_seoul_get():
-    reviews_category = list(db.restaurant.find({'region':'서울'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
+    reviews_category = list(db.restaurant.find({'tag':'서울'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
     return jsonify({'result':reviews_category})
  
 
