@@ -33,3 +33,7 @@ a {
 .cards {
     margin: 12px;
 }
+
+form > select {
+    margin-right: 4px;
+}
