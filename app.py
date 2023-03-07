@@ -17,7 +17,7 @@ def home():
 
 # main(홈) - 전체 목록
 # 목록(카드형)에 상세페이지로 가는 링크 필요 / 주소 가게 이름 사진만 나오는 걸로
-@app.route("/popular", methods=["GET"])
+@app.route("/popular/", methods=["GET"])
 def review_get():
     all_reviews = list(db.restaurant.find({},{'_id':False})) # DB에서 파일 전부 가져오기
     return jsonify({'result':all_reviews})
@@ -40,7 +40,7 @@ def review_get():
 # 임시))) 글작성 페이지 파일 이름 : writepg.html
 @app.route("/write") # --> GET 
 def write_func():
-    return render_template("writepg.html", title="글쓰기")
+    return render_template("posting.html", title="글쓰기")
 
 # 작성한 글 저장하기 : ""등록버튼"" 눌렀을 때 --> id="submitBtn" event
 @app.route("/save-review", methods=["POST"])
@@ -121,13 +121,13 @@ def review_ulsan_get():
     return jsonify({'result':reviews_category})
  
 # 8 카테고리 - 경기
-@app.route("/popular/gyeonggi", methods=["GET"])
+@app.route("/popular/gyeonggido", methods=["GET"])
 def review_gyeonggi_get():
     reviews_category = list(db.restaurant.find({'tag':'경기'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
     return jsonify({'result':reviews_category})
  
 # 9 카테고리 - 강원
-@app.route("/popular/gangwon", methods=["GET"])
+@app.route("/popular/gangwondo", methods=["GET"])
 def review_gangwon_get():
     reviews_category = list(db.restaurant.find({'tag':'강원'},{'_id':False})) # DB에서 해당 카테고리의 파일 가져오기
     return jsonify({'result':reviews_category})
