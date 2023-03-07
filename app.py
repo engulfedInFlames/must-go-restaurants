@@ -20,13 +20,16 @@ def home():
 
         
 
-# 글작성 페이지 html 이름이 writepg.html이라면 --> GET
+# --> GET 글작성 버튼 눌렀을 때 ==> 작성하기 페이지로 넘어가는 코드입니다. 버튼 혹은 글 링크 안에 이 함수 이름 넣어주시면 됩니다.
+# 예시) <a href="{{url_for('write_func')}}">글쓰기</a> 
+# 임시로 글작성 페이지 파일 이름은 writepg.html이라고 했습니다.
 @app.route("/write") 
 def write_func():
     return render_template("writepg.html", title="글쓰기")
 
 
-# 작성한 글 저장하기 --> POST
+
+# 작성한 글 저장하기 --> POST id="submitBtn" event
 @app.route("/save-review", methods=["POST"])
 def save_review():
     restaurant_name_receive = request.form['restaurant_name_give'] # 가게이름
@@ -39,7 +42,10 @@ def save_review():
     comment_receive = request.form['comment_give']  #코멘트
     rating_receive = request.form['rating_give']    #별점
 
-
+    # 카테고리 검색 위한 태그
+    address_spl = road_address_receive.split() # 도로명주소 단어로 나누기
+    address_tag = address_spl[0] # 나눈 리스트의 첫번째
+    
 
     #DB저장
     doc = {
@@ -51,7 +57,8 @@ def save_review():
         'extra_address' : extra_address_receive,
         'nickname' : nickname_receive,
         'comment' : comment_receive,
-        'rating' : rating_receive
+        'rating' : rating_receive,
+        'tag' : address_tag 
     }
     db.restaurant.insert_one(doc)
 
