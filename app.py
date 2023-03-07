@@ -29,15 +29,29 @@ def write_func():
 # 작성한 글 저장하기 --> POST
 @app.route("/save-review", methods=["POST"])
 def save_review():
-    title_receive = request.form['title_give']
-    contents_receive = request.form['contents_give']
-    region_receive = request.form['region_give']
+    restaurant_name_receive = request.form['restaurant_name_give'] # 가게이름
+    postcode_receive = request.form['postcode_give'] # 우편번호 
+    road_address_receive = request.form['road_address_give']    #도로명주소
+    jibun_address_receive = request.form['jibun_address_give']  #지번주소
+    detail_address_receive = request.form['detail_address_give']    #상세주소
+    extra_address_receive = request.form['extra_address_give']  #참고항목
+    nickname_receive = request.form['nickname_give']    #닉네임
+    comment_receive = request.form['comment_give']  #코멘트
+    rating_receive = request.form['rating_give']    #별점
+
+
 
     #DB저장
     doc = {
-        'title' : title_receive,
-        'contents' : contents_receive,
-        'region' : region_receive
+        'restaurant_name' : restaurant_name_receive,
+        'postcode' : postcode_receive,
+        'road_address' : road_address_receive,
+        'jibun_address' : jibun_address_receive,
+        'detail_address' : detail_address_receive,
+        'extra_address' : extra_address_receive,
+        'nickname' : nickname_receive,
+        'comment' : comment_receive,
+        'rating' : rating_receive
     }
     db.restaurant.insert_one(doc)
 
