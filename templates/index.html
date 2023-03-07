@@ -22,11 +22,11 @@
                     let rows = data['result']
                     $('#home').empty()
                     rows.forEach((a) => {
-                        let title = a['trestaurant_name'] //제목
-                        let contents = a['comment'] //내용
-                        let region = a['road_address'] //카테고리(지역)
+                        let restaurant_name = a['restaurant_name'] //제목
+                        let comment = a['comment'] //내용
+                        let road_address = a['road_address'] //카테고리(지역)
 
-                        let temp_html = `${title}, ${contents}, ${region}`
+                        let temp_html = `${restaurant_name}, ${comment}, ${road_address} <br>`
                         $('#home').append(temp_html);
                     })
                 })
@@ -39,12 +39,12 @@
                     $('#home').empty()
                     // list 꺼내기
                     rows.forEach((a) => {
-                        let title = a['trestaurant_name'] //제목
-                        let contents = a['comment'] //내용
-                        let region = a['road_address'] //카테고리(지역)
+                        let restaurant_name = a['restaurant_name'] //제목
+                        let comment = a['comment'] //내용
+                        let road_address = a['road_address'] //카테고리(지역)
 
                         console.log('title')
-                        let temp_html = `${title}, ${contents}, ${region}`
+                        let temp_html = `${restaurant_name}, ${comment}, ${road_address} <br>`
                         $('#home').append(temp_html);
                     })
                 })
@@ -58,7 +58,7 @@
 
     <a href="{{url_for('write_func')}}">글쓰기</a>
     <div id="home"></div>
-    <button onclick="category()">서울</button>
+    <button onclick="category()">카테고리테스트(서울)</button>
 
 
 </body>
