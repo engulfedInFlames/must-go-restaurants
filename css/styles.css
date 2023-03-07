@@ -26,6 +26,7 @@ a {
 }
 
 .region {
+    margin: 12px;
     display: flex;
 }
 
