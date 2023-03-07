@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>맛집공유하기</title>
+  </head>
+
+  <body>
+    <a href="{{url_for('write_func')}}">글쓰기</a>
+    <div id="home"></div>
+    <button onclick="category()">서울</button>
+
+    <script>
+      $(document).ready(function () {
+        listing();
+      });
+
+      function listing() {
+        //페이지 로딩이 완료되면
+        fetch("/popular") // 리스트 함수 호출
+          .then((res) => res.json())
+          .then((data) => {
+            let rows = data["result"];
+            $("#home").empty();
+            rows.forEach((a) => {
+              let title = a["trestaurant_name"]; //제목
+              let contents = a["comment"]; //내용
+              let region = a["road_address"]; //카테고리(지역)
+
+              let temp_html = `${title}, ${contents}, ${region}`;
+              $("#home").append(temp_html);
+            });
+          });
+      }
+      function category() {
+        fetch("/popular/seoul")
+          .then((res) => res.json())
+          .then((data) => {
+            let rows = data["result"];
+            $("#home").empty();
+            // list 꺼내기
+            rows.forEach((a) => {
+              let title = a["trestaurant_name"]; //제목
+              let contents = a["comment"]; //내용
+              let region = a["road_address"]; //카테고리(지역)
+
+              console.log("title");
+              let temp_html = `${title}, ${contents}, ${region}`;
+              $("#home").append(temp_html);
+            });
+          });
+      }
+    </script>
+  </body>
+</html>
