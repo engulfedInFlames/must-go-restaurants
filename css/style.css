@@ -34,3 +34,23 @@ a {
 .cards {
     margin: 12px;
 }
+
+dl {
+    margin: 12px;
+    display: flex;
+}
+
+dl > dt {
+    padding: 2px;
+}
+
+dl > dt > dd {
+    padding: 2px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
