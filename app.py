@@ -1,13 +1,19 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+from requests import get
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
 client = MongoClient("mongodb+srv://recona97:bT33xD4II3D77nhi@mycluster.e0pg5l4.mongodb.net/?retryWrites=true&w=majority")
 db = client.dbsparta
  
-
- 
+def get_thumb(URL):
+    response = get(URL)
+    soup=BeautifulSoup(response.text, "lxml")
+    thumbs = soup.select("#place-main-section-root > div > section > div > div.claas > div > div > div > div")
+    print(thumbs)
+    
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -46,22 +52,24 @@ def write_func():
 @app.route("/save-review", methods=["POST"])
 def save_review():
     restaurant_name_receive = request.form['restaurant_name_give'] # 가게이름
+    restaurant_url_receive = request.form['restaurant_url_give'] # 검색 결과
     postcode_receive = request.form['postcode_give'] # 우편번호 
-    road_address_receive = request.form['road_address_give']    #도로명주소
-    jibun_address_receive = request.form['jibun_address_give']  #지번주소
-    detail_address_receive = request.form['detail_address_give']    #상세주소
+    road_address_receive = request.form['road_address_give'] #도로명주소
+    jibun_address_receive = request.form['jibun_address_give'] #지번주소
+    detail_address_receive = request.form['detail_address_give'] #상세주소
     extra_address_receive = request.form['extra_address_give']  #참고항목
-    nickname_receive = request.form['nickname_give']    #닉네임
+    nickname_receive = request.form['nickname_give'] #닉네임
     comment_receive = request.form['comment_give']  #코멘트
-    rating_receive = request.form['rating_give']    #별점
-
+    rating_receive = request.form['rating_give'] #별점
+    
     # 카테고리 검색 위한 태그
     address_spl = road_address_receive.split() # 도로명주소 단어로 나누기
     address_tag = address_spl[0] # 나눈 리스트의 첫번째
-
+    
     #DB저장
     doc = {
         'restaurant_name' : restaurant_name_receive,
+        'restaurant_url':restaurant_url_receive,
         'postcode' : postcode_receive,
         'road_address' : road_address_receive,
         'jibun_address' : jibun_address_receive,

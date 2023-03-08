@@ -37,25 +37,6 @@ function listing() {
     });
 }
 
-function category() {
-  fetch("/popular/seoul")
-    .then((res) => res.json())
-    .then((data) => {
-      let rows = data["result"];
-      $("#home").empty();
-      // list 꺼내기
-      rows.forEach((a) => {
-        let title = a["trestaurant_name"]; //제목
-        let contents = a["comment"]; //내용
-        let region = a["road_address"]; //카테고리(지역)
-
-        console.log("title");
-        let temp_html = `${title}, ${contents}, ${region}`;
-        $("#home").append(temp_html);
-      });
-    });
-}
-
 // ============================카테고리 선택 시 리스트 ============================
 const region_tags = {
   seoul: "서울",

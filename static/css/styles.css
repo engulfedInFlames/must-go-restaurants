@@ -41,6 +41,7 @@ header {
   width: 250px;
   height: 250px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 5%;
@@ -50,6 +51,11 @@ header {
 .thumb-container > img {
   width: 100%;
   object-fit: cover;
+}
+.label-center {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
 }
 .detail-address {
   display: flex;
