@@ -31,6 +31,6 @@ function submitting() { // button onclick
         .then((res) => res.json())
         .then((data) => {
             alert(data["msg"]);
-            window.location.reload();
+            window.location.replace('/') // 3.8 수정 -- 홈으로 돌아감
         });
 }
