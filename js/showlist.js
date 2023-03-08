@@ -20,17 +20,18 @@
   
             //   (3.8) 카드 누르면 상세페이지로 넘어가는 코드 추가 (카드 a태그로 감싸서 url_for)
               let temp_html = `
-                  <div class="col">
-                      <div class="card h-100">
-                        <a href="{{url_for('move_detail')}}" > 
-                              <div class="card-body">
-                              <h5 class="card-title">${restaurant_name}</h5>
-                              <p>${road_address} </p>
-                              <p class="card-text"> ${comment}</p>
-                            </a>
-                          </div>
-                      </div>
+              <div class="col">
+              <div class="card h-100">
+                <a href='javascript:void(0);' onclick="click_card('${restaurant_name}','${road_address}');">
+                  <div class="card-body">
+                    <h5 class="card-title">${restaurant_name}</h5>
+                    <p>${road_address} </p>
+                    <p class="card-text"> ${comment}</p>
                   </div>
+                </a>
+              </div>
+            </div>
+                      
                                   `
   
               $('#cards-box').append(temp_html);
@@ -90,20 +91,18 @@
   
               console.log("title");
               let temp_html = `
-          <div class="col">
+              <div class="col">
               <div class="card h-100">
-                  <a href="" >
-                  </a>
+                <a href='javascript:void(0);' onclick="click_card('${restaurant_name}','${road_address}');">
                   <div class="card-body">
-                      <a href="" style="text-decoration: none;">
-                      <h5 class="card-title">${restaurant_name}</h5>
-                      <p>${road_address} </p>
-                      <p class="card-text"> ${comment}</p>
-                      </a>
+                    <h5 class="card-title">${restaurant_name}</h5>
+                    <p>${road_address} </p>
+                    <p class="card-text"> ${comment}</p>
                   </div>
+                </a>
               </div>
-          </div>
-                          `;
+            </div>
+                       `;
               $("#cards-box").append(temp_html);
             });
           });

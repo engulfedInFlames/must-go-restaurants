@@ -15,6 +15,10 @@ def home():
 
 
 # ============================= 글 목록 =============================
+@app.route('/home')
+def gohome():
+    return render_template('index.html')
+
 
 # main(홈) - 전체 목록
 # 목록(카드형)에 상세페이지로 가는 링크 필요 / 주소 가게 이름 사진만 나오는 걸로
@@ -90,16 +94,19 @@ def save_review():
 # ============================= 글 조회 =============================
 
 
-@app.route("/move_detail") # 글 링크 누르면 상세페이지로 이동
+@app.route("/move_detail",methods=["POST"]) # 글 링크 누르면 상세페이지로 이동
 def move_detail():
-    return render_template("read.html")
+    address = request.form["address"]
+    aaaa= list(db.restaurant.find({'road_address':address},{'_id':False}))
+    return jsonify({"result":aaaa})
+    # return render_template("read.html")
 
 # (3.8) 우선 임시로 가게이름 값 넣어두었습니다.
-@app.route("/detail") 
-def detail():
-    dr = db.restaurant.find_one({'restaurant_name':'해피치즈스마일 연남점'},{'_id':False}) 
-    print('----------',dr)
-    return jsonify({'result':dr})
+# @app.route("/detail") 
+# def detail():
+#     dr = db.restaurant.find_one({'restaurant_name':'SADDLER HAUS'},{'_id':False}) 
+#     print('----------',dr)
+#     return jsonify({'result':dr})
 
 
 

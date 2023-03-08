@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 변경-css파일 위치 삽입 방식 for flask -->
+  <!-- <link href="{{ url_for('static', filename='reset.css') }}" rel="stylesheet"> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <!-- 변경-css파일 위치 삽입 방식 for flask -->
+  <!-- <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"> -->
+
+  <title>asus 홈페이지</title>
+
+
+  <script>
+
+
+
+
+    // shwolist.js
+
+    $(document).ready(function () { //페이지 로딩시 호출할 함수
+      listing();
+    });
+
+
+    // ============================홈 화면 전체 리스트 ============================
+
+    function listing() { //페이지 로딩이 완료되면
+      fetch('/popular/') // 리스트 함수 호출
+        .then((res) => res.json())
+        .then((data) => {
+          let rows = data['result']
+          $('#cards-box').empty()
+          rows.forEach((a) => {
+            let restaurant_name = a['restaurant_name'] //제목
+            let comment = a['comment'] //내용
+            let road_address = a['road_address'] //카테고리(지역)
+
+            let temp_html = `
+                      <div class="col">
+                        <div class="card h-100">
+                          <a href='javascript:void(0);' onclick="click_card('${restaurant_name}','${road_address}');">
+                            <div class="card-body">
+                              <h5 class="card-title">${restaurant_name}</h5>
+                              <p>${road_address} </p>
+                              <p class="card-text"> ${comment}</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                                `
+
+            $('#cards-box').append(temp_html);
+          })
+        })
+    }
+    // ============================홈 화면 전체 리스트 끝 ============================
+
+
+    // ============================카테고리 선택 시 리스트 ============================
+    // 조회하기 버튼을 클릭했을 때가 아니라 select를 선택했을 때 바로 반영
+    // select값에 onchange 속성 넣어주시면 됩니다. option의 value 값에 따라 작동
+    // 또한 select에 value 값이 없는 전체보기 옵션 추가 필요
+
+    const region_tags = {
+      all: "",
+      seoul: "서울",
+      incheon: "인천",
+      busan: "부산",
+      daegu: "대구",
+      gwangju: "광주",
+      daejeon: "대전",
+      ulsan: "울산",
+      gyeonggi: "경기",
+      gangwon: "강원",
+      chungbuk: "충북", // n-chungcheong으로 하게 되면 key 값이 n-chungcheong이 아니라 "n-chungcheong"이 되어, 일관성을 위해 이름을 조금 바꿨습니다.
+      chungnam: "충남",
+      jeonbuk: "전북",
+      jeonnam: "전남",
+      gyeongbuk: "경북",
+      gyeongnmam: "경남",
+      jeju: "제주",
+    };
+
+    const changeValue = (target) => {
+      //  <select onchange="changeValue(this)">
+      // 선택한 option의 value 값
+      let region_tag_ko = region_tags[target.value];
+      console.log(region_tag_ko);
+
+      const formData = new FormData();
+      formData.append("region_tag_ko", region_tag_ko);
+
+      fetch(`/popular/sorted`, { method: "POST", body: formData })
+        .then((res) => res.json())
+        .then((data) => {
+          let rows = data["result"];
+          $("#cards-box").empty();
+          // list 꺼내기
+          rows.forEach((a) => {
+            let restaurant_name = a["restaurant_name"]; //제목
+            let comment = a["comment"]; //내용
+            let road_address = a["road_address"]; //카테고리(지역)
+
+            console.log("title");
+            let temp_html = `
+            <div class="col">
+                        <div class="card h-100">
+                          <a href='javascript:void(0);' onclick="click_card('${restaurant_name}','${road_address}');">
+                            <div class="card-body">
+                              <h5 class="card-title">${restaurant_name}</h5>
+                              <p>${road_address} </p>
+                              <p class="card-text"> ${comment}</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                              
+                    `;
+            $("#cards-box").append(temp_html);
+          });
+        });
+    };
+
+
+
+
+// 카드 누르면 본문 보이기
+
+    function click_card(name, road_address) {
+      var name_selected = name;
+      var address_selected = road_address;
+      // return restaurant_name_selected
+      // console.log(name_selected,address_selected)
+      const formData = new FormData();
+      formData.append("address", address_selected);
+      
+      fetch('/move_detail', { method: "POST", body: formData })
+        .then((res) => res.json())
+        .then((data) => {
+          let rows = data["result"];
+          $("#cards-box").empty();
+          // list 꺼내기
+          rows.forEach((a) => {
+            let restaurant_name = a["restaurant_name"]; //제목
+            let road_address = a["road_address"]
+            let jibun_address = a["jibun_address"]
+            let detail_address = a["detail_address"]
+            let extra_address = a["extra_address"]
+            let nickname = a["nickname"]
+            let comment = a["comment"]; //내용
+            let rating = a["rating"]
+            let star_repeat = '⭐'.repeat(rating)
+
+            console.log("title");
+            let temp_html = `
+            <div class="card h-100">
+                        <div class="card-body">
+                        <h5 class="card-title">${restaurant_name}</h5>
+                        <div>
+                            주소 <br>${road_address} 
+                            <br> ${jibun_address}
+                            <br> ${detail_address}
+                            </div>
+                        <p class="card-text"> 리뷰 <br>${comment}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li id="star" class="list-group-item">별점: ${star_repeat}</li>
+                            <li id="nickname" class="list-group-item">닉네임: ${nickname}</li>
+                        </ul>
+                        </div>
+                     `;
+            $("#cards-box").append(temp_html);
+          });
+        });
+
+
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+  <div id="home"></div>
+
+  <!-- css/style.css -->
+  <div class="banner">
+    <h1>asus</h1>
+  </div>
+
+  <div class="button">
+    <a href="{{url_for('write_func')}}" class="m-1 btn btn-warning btn" role="button">
+      작성
+    </a>
+    <a href="{{url_for('home')}}" class="m-1 btn btn-warning btn" role="button">뒤로가기</a>
+    <!-- 카테고리 선택하기 ==> 홈화면에서 바로 선택, 조회하기 눌렀을 때 해당 옵션값을 넘겨서 불러오기 -->
+
+    <div class="region">
+      <select onchange="changeValue(this)">
+        <option value="all">전체보기</option>
+        <option value="seoul">서울</option>
+        <option value="incheon">인천</option>
+        <option value="busan">부산</option>
+        <option value="daegu">대구</option>
+        <option value="gwangju">광주</option>
+        <option value="daejeon">대전</option>
+        <option value="ulsan">울산</option>
+        <option value="gyeonggi">경기</option>
+        <option value="gangwon">강원</option>
+        <option value="chungbuk">충북</option>
+        <option value="chungnam">충남</option>
+        <option value="jeonbuk">전북</option>
+        <option value="jeonnam">전남</option>
+        <option value="gyeongbuk">경북</option>
+        <option value="gyeongnmam">경남</option>
+        <option value="jeju">제주</option>
+      </select>
+    </div>
+
+    <main>
+
+      <div id="cards">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+          <div class="col">
+            <div class="card h-100">
+              <a href="">
+                <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_bar1-1_v2.png"
+                  class="card-img-top" alt="요리주점 가게 이미지">
+              </a>
+              <div class="card-body">
+                <a href="" style="text-decoration: none;">
+                  <h5 class="card-title">blog title</h5>
+                  <p class="card-text">review</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <a href="">
+                <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea1-1_v2.png"
+                  class="card-img-top" alt="찻집 가게 이미지">
+              </a>
+              <div class="card-body">
+                <a href="">
+                  <h5 class="card-title">blog title</h5>
+                  <p class="card-text">review</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <a href="">
+                <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea2-1_v2.png"
+                  class="card-img-top" alt="카페, 디저트 가게 이미지">
+              </a>
+              <div class="card-body">
+                <a href="">
+                  <h5 class="card-title">blog title</h5>
+                  <p class="card-text">review</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <a href="">
+                <img src="https://campaign-cdn.pstatic.net/0/campaign/2022/06/gabojagoseoul/img/theme_tea3-1_v2.png"
+                  class="card-img-top" alt="홍차 전문점 가게 이미지">
+              </a>
+              <div class="card-body">
+                <a href="">
+                  <h5 class="card-title">blog title</h5>
+                  <p class="card-text">review</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <!-- 약식(팀 이름, 팀명, 역할, 저작권)-->
+      <dl>
+        <dt>팀명</dt>
+        <dd>asus(Awesome Super Ultra Sexy)</dd>
+        <dt>팀 구성원</dt>
+        <dd>김경수(팀장), 왕규원, 원윤희, 서채연</dd>
+        <dt>역할</dt>
+        <dd></dd>
+      </dl>
+    </footer>
+
+
+
+</body>
+
+</html>
