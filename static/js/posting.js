@@ -83,27 +83,27 @@ thumbsInput.addEventListener("change", onChange);
 function submitting() {
   // 유저가 등록한 이미지 파일들을 읽어들이는 코드를 추가할 예정입니다. 확인을 위해 나머지 코드들은 주석 처리를 해놨습니다.
 
-  // let restaurant_name = $("#restaurantNameInput").val();
-  // let postcode = $("#sample4_postcode").val();
-  // let roadAddress = $("#sample4_roadAddress").val();
-  // let jibunAddress = $("#sample4_jibunAddress").val();
-  // let detailAddress = $("#sample4_detailAddress").val();
-  // let extraAddress = $("#sample4_extraAddress").val();
-  // let nickname = $("#nicknameInput").val();
-  // let comment = $("#commentInput").val();
-  // let rating = $("#rating").val();
+  let restaurant_name = $("#restaurantNameInput").val();
+  let postcode = $("#sample4_postcode").val();
+  let roadAddress = $("#sample4_roadAddress").val();
+  let jibunAddress = $("#sample4_jibunAddress").val();
+  let detailAddress = $("#sample4_detailAddress").val();
+  let extraAddress = $("#sample4_extraAddress").val();
+  let nickname = $("#nicknameInput").val();
+  let comment = $("#commentInput").val();
+  let rating = $("#rating").val();
 
   let formData = new FormData();
 
-  // formData.append("restaurant_name_give", restaurant_name);
-  // formData.append("postcode_give", postcode);
-  // formData.append("road_address_give", roadAddress);
-  // formData.append("jibun_address_give", jibunAddress);
-  // formData.append("detail_address_give", detailAddress);
-  // formData.append("extra_address_give", extraAddress);
-  // formData.append("nickname_give", nickname);
-  // formData.append("comment_give", comment);
-  // formData.append("rating_give", rating);
+  formData.append("restaurant_name_give", restaurant_name);
+  formData.append("postcode_give", postcode);
+  formData.append("road_address_give", roadAddress);
+  formData.append("jibun_address_give", jibunAddress);
+  formData.append("detail_address_give", detailAddress);
+  formData.append("extra_address_give", extraAddress);
+  formData.append("nickname_give", nickname);
+  formData.append("comment_give", comment);
+  formData.append("rating_give", rating);
 
   fetch("/save-review", {
     method: "POST",
@@ -115,3 +115,5 @@ function submitting() {
       window.location.reload(); // => Home으로 이동하게끔
     });
 }
+
+/////////////////////////////////////////////////////////////////////////////////
