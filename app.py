@@ -11,7 +11,7 @@ def home():
     return render_template('index.html')
 
 # ============================= 글 목록 =============================
-# 홈 화면에서는 식당 이름, 주소, 사진만
+# 홈 화면에서는 식당 이름,사진,코멘트,닉네임
 
 @app.route('/home')
 def gohome():
@@ -19,13 +19,13 @@ def gohome():
 
 @app.route("/popular/", methods=["GET"])
 def review_get():
-    all_reviews = list(db.restaurant.find({},{'_id':False})) # DB에서 파일 전부 가져오기
+    all_reviews = list(db.restaurant.find({},{'_id':False}))
     return jsonify({'result':all_reviews})
 
 # ===================== 카테고리 불러오기 시작 =======================
  
 @app.route("/popular/sorted", methods=["POST"])
-def review_sorted_get(): # 옵션값이 전체일때
+def review_sorted_get():
     if request.form["region_tag_ko"] == "":
         reviews_category = list(db.restaurant.find({},{'_id':False}))
         return jsonify({"result":reviews_category})
@@ -82,6 +82,13 @@ def move_detail():
     aaaa= list(db.restaurant.find({'road_address':address},{'_id':False}))
     return jsonify({"result":aaaa})
     
+# ============================= 글 삭제 =============================
+@app.route("/delete",methods=["POST"]) # 글 링크 누르면 상세페이지로 이동
+def delete_card():
+    address = request.form["address"]
+    db.restaurant.delete_one({'road_address':address})
+    return jsonify({'msg': '삭제되었습니다.'})
+ 
     
     
 if __name__ == '__main__':

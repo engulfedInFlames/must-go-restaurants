@@ -22,6 +22,18 @@
     <!-- AJAX CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- Font Awesome CDN -->
+    <script
+      src="https://kit.fontawesome.com/405588dbc6.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 카카오 지도 API CDN-->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e7b35c7c2dd5c95450c9a42792a7bb&libraries=services"
+    ></script>
+
     <!-- 초기 설정 CSS -->
     <link rel="stylesheet" href="static/css/styles.css" />
     <title>Foodie Diary</title>
@@ -32,7 +44,7 @@
 
     <header>
       <div class="hero">
-        <h1>Foodie Diary</h1>
+        <span>Foodie Diary</span>
       </div>
     </header>
 
@@ -75,17 +87,26 @@
         </nav>
       </div>
 
-      <div id="cards-box"></div>
+      <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
+      </div>
     </main>
+
     <footer>
-      <dl>
-        <dt>팀명</dt>
-        <dd>asus(Awesome Super Ultra Sexy)</dd>
-        <dt>팀 구성원</dt>
-        <dd>김경수(팀장), 왕규원, 원윤희, 서채연</dd>
-        <dt>역할</dt>
-        <dd></dd>
-      </dl>
+      <div id="one" class="footer-el">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+      </div>
+      <div id="two" class="footer-el">
+        <span>Super Sexy Team</span>
+        <div>
+          <span>원윤희</span>
+          <span>왕규원</span>
+          <span>서채연</span>
+          <span>김경수</span>
+        </div>
+      </div>
     </footer>
     <script src="static/js/index.js"></script>
   </body>

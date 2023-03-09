@@ -55,25 +55,6 @@ function sample4_execDaumPostcode() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// 사진 포스팅을 위한 함수입니다.
-
-// const onChange = () => {
-//   // 유저가 업로드한 사진 데이터를 가지고 옵니다.
-//   thumbs = [...thumbsInput.files]; // unmutable
-//   const selectedThumb = thumbs[0];
-//   console.log(thumbs);
-
-//   // 유저가 업로드한 사진 데이터를 URL 형식으로 읽습니다.
-//   const imgPreviewer = new FileReader();
-//   imgPreviewer.readAsDataURL(selectedThumb);
-//   imgPreviewer.onload = () => {
-//     // 글쓰기 페이지의 대표 이미지를 등록합니다.
-//     const thumb = document.querySelector(".thumb");
-//     thumb.src = imgPreviewer.result;
-//   };
-// };
-
-/////////////////////////////////////////////////////////////////////////////////
 const myForm = document.querySelector(".my-form");
 const cancelBtn = document.getElementById("cancelBtn");
 
