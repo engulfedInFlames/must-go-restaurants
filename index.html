@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/_reset.css" />
@@ -26,10 +26,9 @@
       border-width: 10px;
     }
 
-    .map {
+    .maps {
       border: 5px;
       width: 500px;
-      height: 700px;
       margin: 20px 20px 20px 20px;
       padding: 20px 20px 20px 20px;
       background-color: beige;
@@ -55,33 +54,61 @@
 
     function listing() {
       fetch('/popular').then(res => res.json()).then(data => {
-
         let rows = data['result']
-        $('#cards').empty()
+        $('#cards-box').empty()
+        $('#restaurant_map').emtpy()
         rows.forEach((a) => {
-          let title = a['title']
+          let restaurant_name = a['restaurant_name']
           let image = a['image']
           let comment = a['comment']
           let nickname = a['nickname']
-          let star = a['star']
+          let star = a['rating']
+          let road_address = a["road_address"]
           let star_repeat = '⭐'.repeat(star)
 
-          let temp_html = `<div class="cards">
-                            <div class="card" style="width: 35rem;">
+          let temp_html = `<div class="card" style="width: 35rem;">
                               <img src="${image}"
                                 class="card-img-top" alt="...">
                               <div class="card-body">
-                                <h5 class="card-title">${title}</h5>
+                                <h5 class="card-title">${restaurant_name}</h5>
                                 <p class="card-text">${comment}</p>
                               </div>
                               <ul class="list-group list-group-flush">
                                 <li id = "star" class="list-group-item">${star_repeat}</li>
                                 <li id = "nickname" class="list-group-item">${nickname}</li>
                               </ul>
-                            </div>
-                          </div>`
-
+                            </div>`
           $('#cards-box').append(temp_html)
+
+          let mapload = `var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                                mapOption = {
+                                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                                    level: 3 // 지도의 확대 레벨
+                                };  
+                            var map = new kakao.maps.Map(mapContainer, mapOption); 
+                            
+                            var geocoder = new kakao.maps.services.Geocoder();
+                            
+                            geocoder.addressSearch('${road_address}', function(result, status) {
+                            
+                                if (status === kakao.maps.services.Status.OK) {
+                            
+                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                            
+                                    var marker = new kakao.maps.Marker({
+                                        map: map,
+                                        position: coords
+                                    });
+                            
+                                    var infowindow = new kakao.maps.InfoWindow({
+                                        content: '<div style="width:150px;text-align:center;padding:6px 0;">${restaurant_name}</div>'
+                                    });
+                                    infowindow.open(map, marker);
+                            
+                                    map.setCenter(coords);
+                                } 
+                            });    `
+          $('#restaurant_map').append(mapload)
         })
       })
     }
@@ -100,11 +127,11 @@
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <button type="button" class="btn btn-primary" href="javascript:window.history.back();">뒤로가기</button>
       <button type="button" class="btn btn-primary" onClick="location.href='write.html'">작성</button>
-       <!-- 글작성페이지를 임시로 write.html로 함 -->
-      </div>
+      <!-- 글작성페이지를 임시로 write.html로 함 -->
+    </div>
     </div>
     <div class="outer-div">
-      <div class="cards">
+      <div class="cards" id="cards-box">
         <div class="card" style="width: 35rem;">
           <img
             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfNTUg%2FMDAxNjU4MjAwNjMwMTEw.355HkcOE0_9mjB_ZSs-hqhH-LuXMJiPafctsx_B-is8g.F3aTKbgwYJv3JBvKpLfa3h1WJtxPg4CI6Wa1rsC0rnUg.JPEG.kkujunist%2Foutput_4171235909.jpg&type=sc960_832"
@@ -120,8 +147,56 @@
           </ul>
         </div>
       </div>
-      <div class="map">
-        지도
+
+      <div class="maps">
+        <p style="margin-top:-12px">
+          <em class="link">
+              <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+                  혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+              </a>
+          </em>
+      </p>
+      <div id="map" style="width:100%;height:350px;"></div>
+      
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e7b35c7c2dd5c95450c9a42792a7bb&libraries=services"></script>
+      <script id="restaurant_map">
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = {
+              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };  
+      
+      // 지도를 생성합니다    
+      var map = new kakao.maps.Map(mapContainer, mapOption); 
+      
+      // 주소-좌표 변환 객체를 생성합니다
+      var geocoder = new kakao.maps.services.Geocoder();
+      
+      // 주소로 좌표를 검색합니다
+      geocoder.addressSearch('서울특별시 서초구 강남대로 465', function(result, status) {
+      
+          // 정상적으로 검색이 완료됐으면 
+           if (status === kakao.maps.services.Status.OK) {
+      
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+      
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+              });
+      
+              // 인포윈도우로 장소에 대한 설명을 표시합니다
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">가게이름</div>'
+              });
+              infowindow.open(map, marker);
+      
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              map.setCenter(coords);
+          } 
+      });    
+      </script>
       </div>
     </div>
     <!-- 콘텐츠 -->
