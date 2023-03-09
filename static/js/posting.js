@@ -57,29 +57,29 @@ function sample4_execDaumPostcode() {
 /////////////////////////////////////////////////////////////////////////////////
 // 사진 포스팅을 위한 함수입니다.
 
-const onChange = () => {
-  // 유저가 업로드한 사진 데이터를 가지고 옵니다.
-  thumbs = [...thumbsInput.files]; // unmutable
-  const selectedThumb = thumbs[0];
-  console.log(thumbs);
+// const onChange = () => {
+//   // 유저가 업로드한 사진 데이터를 가지고 옵니다.
+//   thumbs = [...thumbsInput.files]; // unmutable
+//   const selectedThumb = thumbs[0];
+//   console.log(thumbs);
 
-  // 유저가 업로드한 사진 데이터를 URL 형식으로 읽습니다.
-  const imgPreviewer = new FileReader();
-  imgPreviewer.readAsDataURL(selectedThumb);
-  imgPreviewer.onload = () => {
-    // 글쓰기 페이지의 대표 이미지를 등록합니다.
-    const thumb = document.querySelector(".thumb");
-    thumb.src = imgPreviewer.result;
-  };
-  // 사진 데이터를 서버에 보내는 함수를 작성할 예정입니다.
-};
+//   // 유저가 업로드한 사진 데이터를 URL 형식으로 읽습니다.
+//   const imgPreviewer = new FileReader();
+//   imgPreviewer.readAsDataURL(selectedThumb);
+//   imgPreviewer.onload = () => {
+//     // 글쓰기 페이지의 대표 이미지를 등록합니다.
+//     const thumb = document.querySelector(".thumb");
+//     thumb.src = imgPreviewer.result;
+//   };
+// };
 
 /////////////////////////////////////////////////////////////////////////////////
-function submitting() {
+const myForm = document.querySelector(".my-form");
+
+function onClickSubmit() {
   // 유저가 등록한 이미지 파일들을 읽어들이는 코드를 추가할 예정입니다. 확인을 위해 나머지 코드들은 주석 처리를 해놨습니다.
 
   let restaurant_name = $("#restaurantNameInput").val();
-  let restaurant_url = $("#restaurantUrlInput").val();
   let postcode = $("#sample4_postcode").val();
   let roadAddress = $("#sample4_roadAddress").val();
   let jibunAddress = $("#sample4_jibunAddress").val();
@@ -89,10 +89,16 @@ function submitting() {
   let comment = $("#commentInput").val();
   let rating = $("#rating").val();
 
+  if (!nickname) {
+    nickname = "익명";
+  }
+  if (!comment) {
+    comment = "";
+  }
+
   let formData = new FormData();
 
   formData.append("restaurant_name_give", restaurant_name);
-  formData.append("restaurant_url_give", restaurant_url);
   formData.append("postcode_give", postcode);
   formData.append("road_address_give", roadAddress);
   formData.append("jibun_address_give", jibunAddress);
@@ -101,7 +107,6 @@ function submitting() {
   formData.append("nickname_give", nickname);
   formData.append("comment_give", comment);
   formData.append("rating_give", rating);
-  formData.append("thumbs", thumbs);
 
   fetch("/save-review", {
     method: "POST",
@@ -109,9 +114,19 @@ function submitting() {
   })
     .then((res) => res.json())
     .then((data) => {
-      alert(data["msg"]);
-      window.location.reload(); // => Home으로 이동하게끔
+      console.log(data["msg"]);
     });
 }
+
+function onSubmit(e) {
+  e.preventDefault();
+  if (e.submitter.id === "submitBtn") {
+    // console.log("Submitted");
+    onClickSubmit();
+  }
+  window.location.replace(window.location.origin);
+}
+
+myForm.addEventListener("submit", onSubmit);
 
 /////////////////////////////////////////////////////////////////////////////////

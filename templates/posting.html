@@ -39,27 +39,6 @@
     <main>
       <!-- 글쓰기 양식을 구현하기 위한 <form> 태그 입니다.-->
       <form class="my-form">
-        <!-- 가게 이름 입력란 -->
-        <div class="mb-3">
-          <label for="restaurantNameInput" class="form-label" required>
-            식당 이름
-          </label>
-          <input type="text" class="form-control" id="restaurantNameInput" />
-        </div>
-
-        <!-- 가게 주소 -->
-        <div class="mb-3">
-          <label for="restaurantUrlInput" class="form-label" required>
-            식당 URL
-          </label>
-          <input
-            type="text"
-            class="form-control"
-            id="restaurantUrlInput"
-            placeholder="네이버 URL"
-          />
-        </div>
-
         <!-- thumb은 thumbnail, 즉 대표 이미지를 의미합니다. 사용자가 복수의 사진들을 등록하고, 그중 첫 번째 사진을 대표 이미지로 합니다.
         대표 이미지는 "thumb-container" 안의 <img> 태그에 들어갑니다. -->
         <div class="thumb-container">
@@ -70,6 +49,14 @@
           />
         </div>
         <label class="form-label label-center"> 대표 이미지 </label>
+
+        <!-- 가게 이름 입력란 -->
+        <div class="mb-3">
+          <label for="restaurantNameInput" class="form-label" required>
+            식당 이름
+          </label>
+          <input type="text" class="form-control" id="restaurantNameInput" />
+        </div>
 
         <!-- 주소 입력란 -->
         <div class="mb-3">
@@ -85,6 +72,7 @@
             type="text"
             id="sample4_roadAddress"
             placeholder="도로명주소"
+            required
           />
           <input
             class="form-control address-input"
@@ -99,6 +87,7 @@
               type="text"
               id="sample4_postcode"
               placeholder="우편번호"
+              required
             />
             <input
               class="form-control address-input"
@@ -138,15 +127,12 @@
         </div>
 
         <div class="my-btns">
-          <button
-            onclick="submitting()"
-            id="submitBtn"
-            type="submit"
-            class="btn btn-light"
-          >
+          <button id="submitBtn" class="btn btn-light" type="submit">
             등록
           </button>
-          <button id="cancleBtn" class="btn btn-light">취소</button>
+          <button id="cancleBtn" class="btn btn-light" type="submit">
+            취소
+          </button>
         </div>
       </form>
     </main>

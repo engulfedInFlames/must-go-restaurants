@@ -1,19 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
-from requests import get
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
 client = MongoClient("mongodb+srv://recona97:bT33xD4II3D77nhi@mycluster.e0pg5l4.mongodb.net/?retryWrites=true&w=majority")
 db = client.dbsparta
  
-def get_thumb(URL):
-    response = get(URL)
-    soup=BeautifulSoup(response.text, "lxml")
-    thumbs = soup.select("#place-main-section-root > div > section > div > div.claas > div > div > div > div")
-    print(thumbs)
-    
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -52,7 +44,6 @@ def write_func():
 @app.route("/save-review", methods=["POST"])
 def save_review():
     restaurant_name_receive = request.form['restaurant_name_give'] # 가게이름
-    restaurant_url_receive = request.form['restaurant_url_give'] # 검색 결과
     postcode_receive = request.form['postcode_give'] # 우편번호 
     road_address_receive = request.form['road_address_give'] #도로명주소
     jibun_address_receive = request.form['jibun_address_give'] #지번주소
@@ -69,7 +60,6 @@ def save_review():
     #DB저장
     doc = {
         'restaurant_name' : restaurant_name_receive,
-        'restaurant_url':restaurant_url_receive,
         'postcode' : postcode_receive,
         'road_address' : road_address_receive,
         'jibun_address' : jibun_address_receive,
