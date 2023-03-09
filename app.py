@@ -10,28 +10,30 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
-
 # ============================= 글 목록 =============================
+# 홈 화면에서는 식당 이름, 주소, 사진만
 
-# main(홈) - 전체 목록
-# 목록(카드형)에 상세페이지로 가는 링크 필요 / 주소 가게 이름 사진만 나오는 걸로
+@app.route('/home')
+def gohome():
+    return render_template('index.html')
+
 @app.route("/popular/", methods=["GET"])
 def review_get():
     all_reviews = list(db.restaurant.find({},{'_id':False})) # DB에서 파일 전부 가져오기
     return jsonify({'result':all_reviews})
 
-
-# ============================= 글 조회 =============================
-# topics = list(db.restaurant.find({})) # 글 조회 시 사용할 딕셔너리
-
-# @app.route("/show-review", methods=["GET"])
-# def review_get():
-#     all_reviews = list(db.restaurant.find({'id'=''},)) 
-#     return jsonify({'result':all_reviews})
-
+# ===================== 카테고리 불러오기 시작 =======================
+ 
+@app.route("/popular/sorted", methods=["POST"])
+def review_sorted_get(): # 옵션값이 전체일때
+    if request.form["region_tag_ko"] == "":
+        reviews_category = list(db.restaurant.find({},{'_id':False}))
+        return jsonify({"result":reviews_category})
+    region_tag_ko = request.form["region_tag_ko"]
+    reviews_category = list(db.restaurant.find({'tag':region_tag_ko},{'_id':False}))
+    return jsonify({"result":reviews_category})
 
 # ============================= 글 작성 =============================
-
 # ""글작성 버튼"" 눌렀을 때 ---> 작성하기 페이지로 넘어가는 코드입니다. 버튼 혹은 글 링크 안에 이 함수 이름 넣어주시면 됩니다.
 # 예시) <a href="{{url_for('write_func')}}">글쓰기</a> 
 # 임시))) 글작성 페이지 파일 이름 : writepg.html
@@ -73,17 +75,14 @@ def save_review():
     db.restaurant.insert_one(doc)
     return jsonify({'msg': '저장되었습니다.'})
     
-
-# ===================== 카테고리 불러오기 시작 =======================
- 
-@app.route("/popular/sorted", methods=["POST"])
-def review_sorted_get():
-    region_tag_ko = request.form["region_tag_ko"]
-    reviews_category = list(db.restaurant.find({'tag':region_tag_ko},{'_id':False}))
-    return jsonify({"result":reviews_category})
-
+# ============================= 글 조회 =============================
+@app.route("/move_detail",methods=["POST"]) # 글 링크 누르면 상세페이지로 이동
+def move_detail():
+    address = request.form["address"]
+    aaaa= list(db.restaurant.find({'road_address':address},{'_id':False}))
+    return jsonify({"result":aaaa})
+    
+    
+    
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-
-
-

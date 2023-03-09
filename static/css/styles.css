@@ -1,6 +1,10 @@
 * {
   box-sizing: border;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -72,4 +76,43 @@ header {
   margin: 0 4px;
 }
 
-/*  주소 입력창 */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* 팀원들 CSS */
+.card-title {
+  width: 300px;
+  padding: 20px;
+}
+
+.card-comment {
+  width: 500px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-width: 10px;
+}
+
+.map {
+  border: 5px;
+  width: 500px;
+  height: 700px;
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: beige;
+}
+
+.cards {
+  border: 5px;
+  width: 600px;
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: grey;
+}
+
+.outer-div {
+  display: flex;
+  justify-content: center;
+}
