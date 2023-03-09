@@ -24,7 +24,7 @@
 
     <!-- 초기 설정 CSS -->
     <link rel="stylesheet" href="static/css/styles.css" />
-    <title>맛집공유하기</title>
+    <title>Foodie Diary</title>
   </head>
 
   <body>
@@ -32,47 +32,50 @@
 
     <header>
       <div class="hero">
-        <h1>(Placeholder)</h1>
+        <h1>Foodie Diary</h1>
       </div>
-      <nav>
-        <a href="{{url_for('write_func')}}" class="m-1 btn btn-warning btn">
-          작성
-        </a>
-        <a
-          href="{{url_for('home')}}"
-          class="m-1 btn btn-warning btn"
-          role="button"
-          >뒤로가기</a
-        >
-        <!-- 카테고리 선택하기 ==> 홈화면에서 바로 선택, 조회하기 눌렀을 때 해당 옵션값을 넘겨서 불러오기 -->
-      </nav>
     </header>
 
     <main>
-      <div class="region">
-        <select onchange="changeValue(this)">
-          <option value="all">전체보기</option>
-          <option value="seoul">서울</option>
-          <option value="incheon">인천</option>
-          <option value="busan">부산</option>
-          <option value="daegu">대구</option>
-          <option value="gwangju">광주</option>
-          <option value="daejeon">대전</option>
-          <option value="ulsan">울산</option>
-          <option value="gyeonggi">경기</option>
-          <option value="gangwon">강원</option>
-          <option value="chungbuk">충북</option>
-          <option value="chungnam">충남</option>
-          <option value="jeonbuk">전북</option>
-          <option value="jeonnam">전남</option>
-          <option value="gyeongbuk">경북</option>
-          <option value="gyeongnmam">경남</option>
-          <option value="jeju">제주</option>
-        </select>
+      <div class="wrapper">
+        <div class="region">
+          <select
+            class="form-select form-select-mi"
+            onchange="changeValue(this)"
+          >
+            <option value="all" selected>전체보기</option>
+            <option value="seoul">서울</option>
+            <option value="incheon">인천</option>
+            <option value="busan">부산</option>
+            <option value="daegu">대구</option>
+            <option value="gwangju">광주</option>
+            <option value="daejeon">대전</option>
+            <option value="ulsan">울산</option>
+            <option value="gyeonggi">경기</option>
+            <option value="gangwon">강원</option>
+            <option value="chungbuk">충북</option>
+            <option value="chungnam">충남</option>
+            <option value="jeonbuk">전북</option>
+            <option value="jeonnam">전남</option>
+            <option value="gyeongbuk">경북</option>
+            <option value="gyeongnmam">경남</option>
+            <option value="jeju">제주</option>
+          </select>
+        </div>
+        <nav>
+          <a href="{{url_for('write_func')}}" class="m-1 btn btn-warning btn">
+            작성
+          </a>
+          <a
+            href="{{url_for('home')}}"
+            class="m-1 btn btn-warning btn"
+            role="button"
+            >뒤로가기
+          </a>
+        </nav>
       </div>
-      <div id="cards">
-        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
-      </div>
+
+      <div id="cards-box"></div>
     </main>
     <footer>
       <dl>

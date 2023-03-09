@@ -1,3 +1,6 @@
+/* 제목을 위한 Font를 import */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+
 * {
   box-sizing: border;
 }
@@ -13,8 +16,12 @@ body {
   height: 100vh;
 }
 
+/************************** 배너 CSS **************************/
+
 header {
-  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero {
@@ -32,14 +39,74 @@ header {
   background-position: center 45%;
   background-size: cover;
 
-  color: white;
-  font-size: 48px;
+  /* Import한 Font를 적용 */
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
   font-weight: bold;
+  font-style: italic;
+  color: white;
 }
+
+/************************** 홈 메인 화면 CSS **************************/
+
+main {
+  /* 카드들이 브라우저 가운데에 위치하도록 */
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 64px;
+}
+
+.wrapper {
+  /* <Select> 태그와 nav 버튼들(작성, 뒤로가기) 포함 */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px 0;
+}
+
+.region {
+  width: 200px;
+}
+
+nav > a {
+  width: 100px;
+}
+
+#cards-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.col {
+  width: 33.3%;
+  margin: 0 0 16px 0;
+}
+
+.card {
+  width: 240px;
+}
+
+.map {
+  border: 5px;
+  width: 500px;
+  height: 700px;
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: beige;
+}
+
+/************************** 포스팅 화면 CSS **************************/
 .my-form {
   width: 50%;
   min-width: 360px;
   margin: 0 auto;
+  margin-top: 32px;
 }
 .thumb-container {
   width: 250px;
@@ -77,42 +144,9 @@ header {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-/* 팀원들 CSS */
-.card-title {
-  width: 300px;
-  padding: 20px;
-}
-
-.card-comment {
-  width: 500px;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-width: 10px;
-}
-
-.map {
-  border: 5px;
-  width: 500px;
-  height: 700px;
-  margin: 20px 20px 20px 20px;
-  padding: 20px 20px 20px 20px;
-  background-color: beige;
-}
-
-.cards {
-  border: 5px;
-  width: 600px;
-  margin: 20px 20px 20px 20px;
-  padding: 20px 20px 20px 20px;
-  background-color: grey;
-}
-
-.outer-div {
+  height: 280px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: #ffc007;
 }

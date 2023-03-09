@@ -140,5 +140,4 @@ function onClickCancelBtn() {
 
 myForm.addEventListener("submit", onClickSubmitBtn);
 cancelBtn.addEventListener("click", onClickCancelBtn);
-
 /////////////////////////////////////////////////////////////////////////////////

@@ -21,6 +21,7 @@ function listing() {
                       <div class="col">
                         <div class="card h-100">
                           <a href='javascript:void(0);' onclick="click_card('${restaurant_name}','${road_address}');">
+                          <img src="https://placehold.co/600x400?text=Image" class="card-img-top" alt="image"/>
                             <div class="card-body">
                               <h5 class="card-title">${restaurant_name}</h5>
                               <p>${road_address} </p>
