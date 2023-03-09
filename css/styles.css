@@ -1,34 +1,198 @@
+/* 제목을 위한 Font를 import */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+
 * {
-    box-sizing: border-box;
+  box-sizing: border;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.banner {
-    color: white;
-    height: 250px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    background-position: center;
-    background-image: url('https://myplace-phinf.pstatic.net/20210705_68/1625475536989Uff2v_JPEG/upload_3d4c9da8e9787f322567c130d22eed78.jpg');
-    background-size: cover;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 100vw;
+  height: 100vh;
 }
 
-.btn > ul > li > a {
-    text-decoration: none;
+/************************** 배너 CSS **************************/
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/static/imgs/banner.jpg");
+  background-position: center 45%;
+  background-size: cover;
+
+  /* Import한 Font를 적용 */
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: white;
+}
+
+/************************** 홈 메인 화면 CSS **************************/
+
+main {
+  /* 카드들이 브라우저 가운데에 위치하도록 */
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 64px;
+}
+
+.wrapper {
+  /* <Select> 태그와 nav 버튼들(작성, 뒤로가기) 포함 */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px 0;
 }
 
 .region {
-    margin: 12px;
-    display: flex;
+  width: 200px;
 }
 
-.cards {
-    margin: 12px;
+nav > a {
+  width: 100px;
 }
 
-form > select {
-    margin-right: 4px;
+#cards-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
+
+.col {
+  width: 33.3%;
+  margin: 0 0 16px 0;
+}
+
+.card {
+  width: 240px;
+}
+
+.map {
+  border: 5px;
+  width: 500px;
+  height: 700px;
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: beige;
+}
+
+/************************** 포스팅 화면 CSS **************************/
+.my-form {
+  width: 50%;
+  min-width: 360px;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+.thumb-container {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  border: 2px solid #ced4da;
+  margin: 0 auto;
+}
+.thumb-container > img {
+  width: 100%;
+  object-fit: cover;
+}
+.label-center {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+.detail-address {
+  display: flex;
+}
+.address-input {
+  margin-top: 8px;
+}
+.my-btns {
+  display: flex;
+  justify-content: center;
+}
+.my-btns > button {
+  width: 60px;
+  margin: 0 4px;
+}
+
+/* card-box */
+
+.card.h-100{
+  background-color: #ffc007;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-body > p {
+  font-size: 12px;
+}
+
+.card-body > div {
+  font-size: 12px;
+}
+
+.card-body > h5:hover {
+  color: white;
+  transition:  0.5s ease-in-out;
+}
+
+
+/* footer */
+dl {
+  margin: 12px;
+  display: flex;
+}
+
+dl > dt {
+  padding: 2px;
+}
+
+dl > dt > dd {
+  padding: 2px;
+}
+
+footer {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc007;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
