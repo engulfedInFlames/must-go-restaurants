@@ -1,0 +1,297 @@
+/* 제목을 위한 Font를 import */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+.nanumgothic * {
+  font-family: 'Nanum Gothic', sans-serif;
+ }
+
+@font-face {
+  font-family: 'IM_Hyemin-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: 'Nanum Gothic', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* width: 100vw;
+  height: 100vh; */
+}
+
+/************************** 배너 CSS **************************/
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.hero {
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/static/imgs/banner.jpg");
+  background-position: center 45%;
+  background-size: cover;
+
+  /* Import한 Font를 적용 */
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: white;
+}
+
+.banner_home{
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/************************** 링크 무지개 효과 **************************/
+
+a:hover, a:focus { animation-duration: 3s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+@keyframes rainbowLink {     
+  0%   {color: red; }
+    10%   {color: orange; }
+    23%  {color: yellow; }
+    36%  {color: yellowgreen; }
+    49%  {color: green; }
+    62%   {color: blue; }
+    74%  {color: indigo; }
+    86%   {color: purple; }
+    100% {color: red; }
+}
+
+/************************** 홈 메인 화면 CSS **************************/
+
+main {
+  /* 카드들이 브라우저 가운데에 위치하도록 */
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 64px;
+} 
+
+
+.wrapper {
+  /* <Select> 태그와 nav 버튼들(작성, 뒤로가기) 포함 */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px 0;
+}
+
+.region {
+  width: 200px;
+}
+
+nav > a {
+  width: 100px;
+}
+
+#cards-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.mycards {
+  margin: 20px auto 0px auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+/* ------------------ 홈 카드 겹치는 문제 때문에 비활성화 (상세페이지에 영향 없습니다) ------------------ */
+/* .col {
+  width: 33.3%;
+  margin: 0 0 16px 0;
+} */
+
+/* .card {
+  width: 240px;
+} */
+
+.map {
+  border: 5px;
+  width: 500px;
+  height: 700px;
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: beige;
+}
+
+/************************** 상세페이지 CSS **************************/
+
+#detail_page{
+  width: 100%;
+  position: relative;
+}
+.detail-title{
+  height: 60px;
+  border-bottom: solid 2px rgba(65, 49, 80, 0.171);
+}
+#detail_page h5{
+  font-weight: bolder;
+  font-size: 30px;
+  padding: 0 30px;
+  text-align: center;
+  font-family: 'IM_Hyemin-Bold'
+}
+#detail-body{
+  float: left;
+  width: 60%;
+  left: 0px;
+  padding-left: 30px;
+  padding-top: 30px;
+  
+}
+.comment{
+  margin-top: 20px;
+  white-space: normal;
+
+}
+
+#info{
+  width:40vw;
+  padding: 0px;
+  position: absolute;
+  bottom: 10px;
+}
+.address{
+  margin-bottom: 10px;
+  white-space: normal;
+}
+.maps{
+  float: right;
+  width: 40%;
+  right: 0px;
+  padding : 30px;
+  border-left: solid 2px rgba(65, 49, 80, 0.171);
+}
+#delete-form{
+  margin-top: 20px;
+}
+#del_button{
+  width: 70px;
+  height: 35px;
+  font-size: 15px;
+  padding: 5px;
+}
+/************************** 포스팅 화면 CSS **************************/
+.my-form {
+  width: 50%;
+  min-width: 360px;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+.thumb-container {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  border: 2px solid #ced4da;
+  margin: 0 auto;
+}
+.thumb-container > img {
+  width: 100%;
+  object-fit: cover;
+}
+.label-center {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+.detail-address {
+  display: flex;
+}
+.address-input {
+  margin-top: 8px;
+}
+.my-btns {
+  display: flex;
+  justify-content: center;
+}
+.my-btns > button {
+  width: 60px;
+  margin: 0 4px;
+}
+
+/* card-box */
+
+.card.h-100{
+  background-color: #fff5bca2;
+}
+
+.card-title {
+  font-weight: bold;
+  
+}
+
+.card-body > p {
+  font-size: 12px;
+}
+
+.card-body > div {
+  font-size: 12px;
+}
+/* 
+.card-body > h5:hover {
+  color: white;
+  transition:  0.5s ease-in-out;
+} */
+
+
+/* footer */
+dl {
+  margin: 12px;
+  display: flex;
+}
+
+dl > dt {
+  padding: 2px;
+}
+
+dl > dt > dd {
+  padding: 2px;
+}
+
+footer {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc007;
+  font-size: 12px;
+}
+
