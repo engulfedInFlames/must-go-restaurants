@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@400;700&display=swap');
 * {
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .banner {
-    color: white;
+
     height: 250px;
 
     display: flex;
@@ -11,15 +13,26 @@
     align-items: center;
     justify-content: center;
 
-    background-color: pink;
+
     background-position: center;
-    background-image: url('https://myplace-phinf.pstatic.net/20210705_68/1625475536989Uff2v_JPEG/upload_3d4c9da8e9787f322567c130d22eed78.jpg');
-    background-size: cover;
+    background-image: url('https://ifh.cc/g/PJXMp4.png');
+    background-repeat: no-repeat;
+}
+
+
+
+.box {
+    display: flex;
+}
+
+.category {
+    margin-left: 12px;
+    flex: 1;
 }
 
 .button {
-    margin: 12px;
-    display: flex;
+    flex: 1;
+    text-align: right;
 }
 
 .btn btn-success {
@@ -49,4 +62,10 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
+
+    height: 120px;
+    background-color: #E5B04D;
+    opacity: .8;
 }
+
