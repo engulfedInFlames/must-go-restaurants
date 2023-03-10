@@ -286,6 +286,7 @@ nav > a {
 }
 
 footer {
+  user-select: none;
   height: 280px;
   display: flex;
   flex-direction: column;
