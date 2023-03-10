@@ -63,7 +63,7 @@ const region_tags = {
   jeonnam: "전남",
   gyeongbuk: "경북",
   gyeongnmam: "경남",
-  jeju: "제주",
+  jeju: "제주특별자치도",
 };
 
 const changeValue = (target) => {
@@ -124,6 +124,7 @@ function click_card(name, road_address) {
       // list 꺼내기
       rows.forEach((a) => {
         let restaurant_name = a["restaurant_name"]; //제목
+        let image_url = a["image_url"];
         let road_address = a["road_address"];
         let jibun_address = a["jibun_address"];
         let detail_address = a["detail_address"];
@@ -137,13 +138,17 @@ function click_card(name, road_address) {
         <div id = "detail_page">
         <h5 class="detail-title">${restaurant_name}</h5>
           <div id = "detail-body">
-            <div class="rating">${star_repeat} </div>
-            <div class="comment"> ${comment}</div>
-            <div id ="info">
-              <div class = "address">
-                ${road_address} ${extra_address}
-              </div> 
-              <div class = "nickname">글쓴이: ${nickname}</div>
+            <img class="detail-image" src="${image_url}" alt="image"/>
+            <div class="detail-writing"> 
+              <div class="rating">${star_repeat} </div>
+              <div class="comment"> ${comment}</div>
+              <div id ="info">
+                <div class = "address">
+                  ${road_address} ${extra_address}
+                </div> 
+                <div class = "nickname">글쓴이: ${nickname}</div>
+            </div>
+  
               <div>
                 <form id = "delete-form">
                   <button id="del_button" class="btn btn-outline-secondary" onclick="delete_card ('${restaurant_name}','${road_address}')" >삭제하기</button>

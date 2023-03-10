@@ -108,7 +108,7 @@ main {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  margin-bottom: 64px;
+  margin-bottom: 180px;
 }
 
 .wrapper {
@@ -177,20 +177,26 @@ nav > a {
   font-family: "IM_Hyemin-Bold";
 }
 #detail-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   float: left;
   width: 60%;
-  left: 0px;
+  height: 100%;
   padding: 30px;
 }
-.comment {
-  margin-top: 20px;
-  white-space: normal;
+
+.detail-image {
+  width: 320px;
+  height: 240px;
+  border-radius: 8px;
+  margin: 0 auto;
+  margin-bottom: 32px;
 }
 
 #info {
   width: 40vw;
   padding: 0px;
-  position: absolute;
   bottom: 10px;
 }
 .address {
@@ -316,5 +322,24 @@ footer {
 }
 #two > div > span {
   font-size: 20px;
+  margin: 0 2px;
+}
+
+/* 추가 */
+footer .row {
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+footer .col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+}
+.contact > span {
+  margin-right: 4px;
+}
+.contact > i {
   margin: 0 2px;
 }
