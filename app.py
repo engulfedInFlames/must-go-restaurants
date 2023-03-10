@@ -19,13 +19,13 @@ def gohome():
 
 @app.route("/popular/", methods=["GET"])
 def review_get():
-    all_reviews = list(db.restaurant.find({},{'_id':False}))
+    all_reviews = list(db.restaurant.find({},{'_id':False})) # DB에서 파일 전부 가져오기
     return jsonify({'result':all_reviews})
 
 # ===================== 카테고리 불러오기 시작 =======================
  
 @app.route("/popular/sorted", methods=["POST"])
-def review_sorted_get():
+def review_sorted_get(): # 옵션값이 전체일때
     if request.form["region_tag_ko"] == "":
         reviews_category = list(db.restaurant.find({},{'_id':False}))
         return jsonify({"result":reviews_category})
@@ -46,6 +46,7 @@ def write_func():
 @app.route("/save-review", methods=["POST"])
 def save_review():
     restaurant_name_receive = request.form['restaurant_name_give'] # 가게이름
+    image_url_receive = request.form['image_url_give']
     postcode_receive = request.form['postcode_give'] # 우편번호 
     road_address_receive = request.form['road_address_give'] #도로명주소
     jibun_address_receive = request.form['jibun_address_give'] #지번주소
@@ -62,6 +63,7 @@ def save_review():
     #DB저장
     doc = {
         'restaurant_name' : restaurant_name_receive,
+        'image_url': image_url_receive,
         'postcode' : postcode_receive,
         'road_address' : road_address_receive,
         'jibun_address' : jibun_address_receive,
@@ -81,15 +83,19 @@ def move_detail():
     address = request.form["address"]
     aaaa= list(db.restaurant.find({'road_address':address},{'_id':False}))
     return jsonify({"result":aaaa})
-    
-# ============================= 글 삭제 =============================
+
+
+# ============================= 글 삭제 ============================= 
+
 @app.route("/delete",methods=["POST"]) # 글 링크 누르면 상세페이지로 이동
 def delete_card():
     address = request.form["address"]
+    
     db.restaurant.delete_one({'road_address':address})
-    return jsonify({'msg': '삭제되었습니다.'})
- 
+    return jsonify({'msg': '삭제되었습니다.'})   
     
-    
+
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

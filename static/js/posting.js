@@ -55,13 +55,35 @@ function sample4_execDaumPostcode() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
+// 사진 포스팅을 위한 함수입니다.
+const thumbsInput = document.getElementById("thumbsInput");
+
+// const onChange = () => {
+//   // 유저가 업로드한 사진 데이터를 가지고 옵니다.
+//   const thumbs = [...thumbsInput.files]; // unmutable
+//   const selectedThumb = thumbs[0];
+//   console.log(thumbs);
+
+//   // 유저가 업로드한 사진 데이터를 URL 형식으로 읽습니다.
+//   const imgPreviewer = new FileReader();
+//   imgPreviewer.readAsDataURL(selectedThumb);
+//   imgPreviewer.onload = () => {
+//     // 글쓰기 페이지의 대표 이미지를 등록합니다.
+//     const thumb = document.querySelector(".thumb");
+//     thumb.src = imgPreviewer.result;
+//   };
+// };
+
+/////////////////////////////////////////////////////////////////////////////////
 const myForm = document.querySelector(".my-form");
 const cancelBtn = document.getElementById("cancelBtn");
 
+console.log($("thumbsInput").val());
+
 function onClickSubmit() {
   // 유저가 등록한 이미지 파일들을 읽어들이는 코드를 추가할 예정입니다. 확인을 위해 나머지 코드들은 주석 처리를 해놨습니다.
-
   let restaurant_name = $("#restaurantNameInput").val();
+  let image_url = $("#thumbsInput").val();
   let postcode = $("#sample4_postcode").val();
   let roadAddress = $("#sample4_roadAddress").val();
   let jibunAddress = $("#sample4_jibunAddress").val();
@@ -77,10 +99,18 @@ function onClickSubmit() {
   if (!comment) {
     comment = "";
   }
+  if (!image_url) {
+    image_url =
+      "https://placehold.co/250x250/white/e9ecef/?text=Image&?font=Open+Sans";
+  }
+  if (!extraAddress) {
+    extraAddress = " ";
+  }
 
   let formData = new FormData();
 
   formData.append("restaurant_name_give", restaurant_name);
+  formData.append("image_url_give", image_url);
   formData.append("postcode_give", postcode);
   formData.append("road_address_give", roadAddress);
   formData.append("jibun_address_give", jibunAddress);
@@ -96,7 +126,7 @@ function onClickSubmit() {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data["msg"]);
+      alert(data["msg"]); // <----(3.9)변경
     });
 }
 

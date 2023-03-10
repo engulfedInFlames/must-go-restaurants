@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <!-- RESET CSS -->
     <link rel="stylesheet" href="static/css/_reset.css" />
 
@@ -19,20 +22,20 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- AJAX CDN-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Font Awesome CDN -->
     <script
       src="https://kit.fontawesome.com/405588dbc6.js"
       crossorigin="anonymous"
     ></script>
 
-    <!-- 카카오 지도 API CDN-->
+    <!-- 지도 API (현재 등록된 도메인은 http://localhost:5000 입니다.)  -->
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16e7b35c7c2dd5c95450c9a42792a7bb&libraries=services"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9861e1dc0c4fda69ff00e6929eda6e1a&libraries=services"
     ></script>
+
+    <!-- AJAX CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- 초기 설정 CSS -->
     <link rel="stylesheet" href="static/css/styles.css" />
@@ -44,7 +47,9 @@
 
     <header>
       <div class="hero">
-        <span>Foodie Diary</span>
+        <a href="{{url_for('home')}}" class="banner_home">
+          <span>Foodie Diary</span>
+        </a>
       </div>
     </header>
 
@@ -75,8 +80,8 @@
           </select>
         </div>
         <nav>
-          <a href="{{url_for('write_func')}}" class="m-1 btn btn-warning btn">
-            작성
+          <a href="{{url_for('write_func')}}" class="btn btn-success">
+            글작성
           </a>
           <a
             href="{{url_for('home')}}"
@@ -86,9 +91,8 @@
           </a>
         </nav>
       </div>
-
       <div class="mycards">
-        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="cards-box"></div>
       </div>
     </main>
 
